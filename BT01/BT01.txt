@@ -1,0 +1,101 @@
+1. Lệnh sau đây làm gì khi grade là một biến kiểu int? Nếu có lỗi cú pháp, hãy sửa lỗi.
+bool isA = (90 <= grade <= 100);
+Lệnh đó không hoạt động như mong đợi. Cần sửa thành bool isA = (grade >= 90 && grade <= 100); để kiểm tra xem grade có nằm trong khoảng từ 90 đến 100 hay không
+
+2. Đoạn chương trình sau đây in ra kết quả gì?
+double x = (double) (3/5);
+	cout << x;
+Kết quả in ra sẽ là 0.0. Việc chuyển đổi kiểu double không áp dụng cho phép tính trên các toán hạng kiểu int, do đó 3/5 được tính là 0 trước khi chuyển đổi sang kiểu double.
+
+
+3. Tại sao đoạn code dưới đây không in ra 4294967296 = 2^32?
+int x = 65536;
+	long y = x * x;
+	cout << y;
+Khi nhân hai số kiểu int với nhau, kết quả sẽ là kiểu int và không thể lưu trữ giá trị vượt quá giới hạn của kiểu int (2^31 - 1). Vì vậy, kết quả của y sẽ bị tràn số và không chính xác. Để tính đúng kết quả, cần chuyển kiểu của x sang long trước khi thực hiện phép nhân, bằng cách sử dụng long y = (long) x * x;
+
+4. Biểu thức sau có giá trị gì?
+(sqrt(2) * sqrt(2) == 2)
+Biểu thức sẽ trả về giá trị là true. sqrt(2) là một số vô tỉ và có giá trị xấp xỉ 1.414. Do đó, lời gọi sqrt(2) * sqrt(2) trả về 2.
+
+5. Viết một chương trình divideByZero để xem chuyện gì xảy ra khi bạn đem chia một giá trị kiểu int hoặc double cho 0 hoặc lấy đồng dư cho 0.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10;
+    int y = 0;
+    int z = x / y; // Chia cho 0
+    cout << z << endl; // In ra kết quả
+    return 0;
+}
+
+6. Thử xem trình biên dịch nói gì với một chương trình có hàm main chứa đoạn code sau
+int a = 27 * "three";
+hoặc
+double x;
+	cout << x;
+Nếu chuyển dòng khai báo x ra ngoài hàm main thì chuyện gì xảy ra?
+
+Khi biên dịch đoạn code int a = 27 * "three";, trình biên dịch sẽ phát hiện lỗi và thông báo rằng "invalid conversion from 'const char*' to 'int'". Đoạn code double x; cout << x; không có lỗi, nhưng nó sẽ in ra một giá trị rác không xác định.
+Nếu chuyển dòng khai báo x ra ngoài hàm main, x sẽ được khởi tạo với giá trị mặc định của kiểu double là 0.
+
+7. Đoạn code sau cho output gì?
+int threeInt = 3;
+	int fourInt  = 4;
+	double threeDouble = 3.0;
+	double fourDouble  = 4.0;
+	cout << threeInt / fourInt << endl;
+	cout << threeInt / fourDouble << endl;
+	cout << threeDouble / fourInt << endl;
+	cout << threeDouble / fourDouble << endl;
+0
+0.75
+1.0
+0.75
+
+8. Chuyện gì xảy ra nếu ta khai báo hai biến trùng tên trong cùng một khối lệnh (block)? Lấy ví dụ là chương trình có hàm main() với nội dung sau:
+int  arg1;
+	arg1 = -1;
+	int x, y, z;
+	char myDouble = ’5 ’;
+	char arg1 = ’A ’;
+	cout << arg1 << "\n";
+	return 0;
+Trong trường hợp này, chương trình sẽ không biên dịch được do tên biến arg1 đã được sử dụng hai lần và có kiểu dữ liệu khác nhau (int và char). Cần phải đổi tên một trong hai biến.
+9. Cùng câu hỏi trên với đoạn code sau:
+int arg1;
+	arg1 = -1;
+	{
+	  char arg1 = ’A’; 
+	  cout << arg1 << "\n"; 
+	} 
+	return 0; 
+Trong khối lệnh con, định danh arg1 chỉ tới biến arg1 kiểu char mà ta khai báo trong khối lệnh đó.
+
+Khi ở bên trong khối lệnh con, định danh arg1 chỉ tới biến arg1 nào?
+
+10. Cùng câu hỏi trên với đoạn code sau:
+int arg1;
+	arg1 = -1;
+	{
+	  char arg1 = ’A’; 
+	} 
+	cout << arg1 << "\n"; 
+	return 0; 
+
+
+Khi ra khỏi khối lệnh con, định danh arg1 chỉ tới biến arg1 nào?
+Khi ra khỏi khối lệnh con, định danh arg1 chỉ tới biến arg1 kiểu int mà ta khai báo ở ngoài khối lệnh. Do đó, khi in giá trị của arg1 ở ngoài khối lệnh con, kết quả sẽ là -1.
+
+11. Chuyển đổi nhiệt độ. Dòng lệnh sau có nhiệm vụ đổi từ độ F (Fahrenheit) sang độ C (Celsius). Lệnh đó có gì sai?
+double C = (F - 32) * (5 / 9);
+Lệnh đổi nhiệt độ có vấn đề là trong phép tính (5 / 9), phép chia được thực hiện giữa hai số nguyên, do đó kết quả trả về sẽ là một số nguyên, không phải số thập phân như mong đợi. Để sửa lỗi này, ta có thể chuyển một trong hai số trong phép chia thành số thực, ví dụ: 5.0 / 9 hoặc 5 / 9.0.
+
+12. Đoạn code sau in ra kết quả gì?
+if (10 > 5); 
+	 else; {           
+	    cout << "Here";
+	 };
+Đoạn code sẽ in ra kết quả là "Here". 
