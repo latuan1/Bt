@@ -22,7 +22,7 @@ int main()
     int n;
     cin >> n;
     int arr[n];
-    for (int i=0;i<n;i++)arr[i]=(int)(rand()* 50/(1.0 + RAND_MAX));
+    for (int i=0;i<n;i++)arr[i]=rand()%50;
     printNumber(arr,n);
     return 0;
 }
