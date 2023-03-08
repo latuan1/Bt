@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int n,so[100],check[100];
+int n,so[10],check[10];
 
 void printkq()
 {
@@ -28,7 +28,7 @@ void test(int i)
 int main()
 {
     cin >> n;
-    for (int i=0;i<100;i++)check[i]=1;
+    for (int i=0;i<10;i++)check[i]=1;
     test(0);
     return 0;
 }
