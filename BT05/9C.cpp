@@ -5,7 +5,7 @@ using namespace std;
 
 int randNumber(int n)
 {
-    return (int)(rand()*n/(1.0+RAND_MAX));
+    return rand()%n;
 }
 
 int main()
